@@ -14,6 +14,28 @@
         header("Location: login.php");
         exit;
     }
+
+
+    if( isset($_POST['input'])) {
+    	// echo $_POST['nama_lengkap'];
+    	// echo $_POST['kasus'];
+    	// echo $_POST['provinsi'];
+    	if(input_data($_POST) > 0) {
+			echo "
+			<script>
+				alert('Data Berhasil di Tambahkan!');
+					document.location.href = 'input_covid.php';
+					</script>
+			";
+		}else {
+			echo "
+			<script>
+				alert('Data gagal di Tambahkan!');
+					document.location.href = 'input_covid.php';
+					</script>
+			";
+		}
+    }
  ?>
 
  <!DOCTYPE html>
@@ -26,6 +48,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/app.js"></script>
     <title>EDU - COVID FIRAL</title>
  </head>
  <body>
@@ -43,6 +67,9 @@
  					<li class="nav-item">
  						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
  					</li>
+ 					<li class="nav-item">
+                        <a class="nav-link" href="input_covid.php">Input Data</a>
+                    </li>
  					<li class="nav-item">
  						<a class="nav-link" href="pencegahan.php">Pencegahan</a>
  					</li>
@@ -68,35 +95,75 @@
  </nav>
 </header>
 	
-<div class="row">
-  <div class="col-md-7 offset-md-3">
-  	<div class="container" style="border:2px solid black">
-  		<h1>FORM INPUT DATA COVID RANGER</h1>
-        <form action="" method="post" class="text-center">
-          <label>ID COVID RANGER</label><br>
-          <input type="text" name="id" value="<?= $rows['id'] ?>"><br>
-          <label>Nama Lengkap</label><br>
-          <input type="text" name="id" value="<?= $rows['nama_lengkap'] ?>"><br>
-          <label>Kasus</label><br>
-          <input type="text" name="id" value=""><br>
-          <label>Jumlah Kasus</label><br>
-          <input type="text" name="id" value=""><br>
-          <label>Provinsi</label><br>
-          <input type="text" name="id" value=""><br>
-          <label>Kota</label><br>
-          <input type="text" name="id" value=""><br>
-          <label>kelurahan</label><br>
-          <input type="text" name="id" value=""><br>
-          <label>kecamatan</label><br>
-          <input type="text" name="id" value=""><br>
-    	</form>
-      </div>
+<div class="container">
+	<h1 class="text-center">INPUT DATA COVID</h1>
+<form class="row g-3" method="post">
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">ID</label>
+    <input type="text" class="form-control" id="inputEmail4" readonly value="<?= $rows['id'] ?>" name="id_ranger">
   </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">Nama Lengkap</label>
+    <input type="text" class="form-control" id="inputPassword4" name="nama_lengkap" readonly value="<?= $rows['nama_lengkap'] ?>">
+  </div>
+  <div class="col-md-6">
+    <label for="inputState" class="form-label">Kasus</label>
+    <select id="inputState" class="form-select" name="kasus">
+      <option selected>-- Pilih --</option>
+      <option value="Positif">Positif</option>
+      <option value="Sembuh">Sembuh</option>
+      <option value="Meninggal Dunia">Meninggal Dunia</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="inputAddress" class="form-label">Jumlah</label>
+    <input type="number" class="form-control" id="inputAddress" name="jumlah">
+  </div>
+
+  <div class="col-md-6">
+  	<?php 
+  	$provinsi = mysqli_query($con,"SELECT * FROM provinces");
+  	?>
+  	<label for="inputState" class="form-label">Provinsi</label>
+  	<select name="provinsi" id="provinsi" class="form-select">
+  		<option value="" selected>Pilih Provinsi</option>
+  		<?php while($row_provinsi = mysqli_fetch_array($provinsi)) { ?>
+  			<option value="<?php echo $row_provinsi["id"] ?>"><?php echo $row_provinsi["name"] ?></option>
+  		<?php } ?>
+  	</select>
+  </div>
+
+  <div class="col-md-6">
+  	<label for="inputState" class="form-label">Kota</label>
+  	<select name="kota" id="kota" class="form-select">
+  		<option value="" selected>Pilih Kota</option>
+  	</select>
+  </div>
+
+  <div class="col-md-6">
+  	<label for="inputState" class="form-label">Kecamatan</label>
+  	<select name="kecamatan" id="kecamatan" class="form-select">
+  		<option value="" selected>Pilih Kecamatan</option>
+  	</select>
+  </div>
+
+  <div class="col-md-6">
+  	<label for="inputState" class="form-label">Kelurahan</label>
+  	<select name="kelurahan" id="kelurahan" class="form-select">
+  		<option value="" selected>Pilih Kelurahan</option>
+  	</select>
+  </div>
+  <div class="col-12">
+  </div>
+  <div class="col-12">
+  </div>
+  <div class="col-12 text-center">
+    <button type="submit" class="btn btn-primary" name="input">Submit</button>
+  </div>
+</form>
 </div>
 
-
-
-	<footer class="mt-auto">
+	<footer class="mt-auto fixed-bottom">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">EDU-COVID FIRAL</a>
