@@ -1,0 +1,290 @@
+<?php 
+    session_start();
+    require_once 'config.php';
+
+    $id = $_SESSION['id'];
+    $result = mysqli_query($con, "SELECT * FROM akun where id_covid_ranger = '$id'");
+    $row = mysqli_fetch_array($result);
+
+    if( !isset($_SESSION['Login_user']) ) {
+        header("Location: login.php");
+        exit;
+    }
+
+ ?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>EDU - COVID FIRAL</title>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">EDU-COVID</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pencegahan.php">Pencegahan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="statistik.php">Data Statistik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuis.php">Kuis</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $row['username']  ?>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                      <!-- <li><a class="dropdown-item" href="login.php">Ganti Password</a></li> -->
+                  </ul>
+              </li>
+          </ul>
+      </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <content>
+        <div class="header-parent">
+            <div class="header-child">
+                <h1>Quiz Covid-19</h1>
+                <p>Pertanyaan-pertanyaan menarik untuk menambah pemahaman tentang covid-19.</p>
+            </div>
+            <div class="header-child">
+                <img src="img/header.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center row">
+                <div class="col-md-10 col-lg-10">
+                    <div class="border">
+                        <div class="question bg-white p-3 border-bottom">
+                            <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                                <h4>Covid Quiz</h4>
+                                <h4 id="shownilai">Nilai anda: <span id="nilainya"></span></h4>
+                            </div>
+                        </div>
+                        <div class="question bg-white p-3 border-bottom">
+                            <div class="listpertanyaan" id="pertanyaan1">
+                                <div class="d-flex flex-row align-items-center question-title">
+                                    <h5 class="mt-1 ml-2">1. Kapan kasus covid-19 terdeteksi di indonesia?</h5>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q1-1" type="radio" name="pertanyaan1" value="2018">
+                                        <span>2018</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q1-2" type="radio" name="pertanyaan1" value="2019">
+                                        <span>2019</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q1-3" type="radio" name="pertanyaan1" value="2020">
+                                        <span>2020</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q1-4" type="radio" name="pertanyaan1" value="2021">
+                                        <span>2021</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="listpertanyaan" id="pertanyaan2">
+                                <div class="d-flex flex-row align-items-center question-title">
+                                    <h5 class="mt-1 ml-2">2. Dimana kasus pertama covid-19?</h5>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q2-1" type="radio" name="pertanyaan2" value="Wuhan">
+                                        <span>Wuhan</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q2-2" type="radio" name="pertanyaan2" value="Jakarta">
+                                        <span>Jakarta</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q2-3" type="radio" name="pertanyaan2" value="Washington">
+                                        <span>Washington</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q2-4" type="radio" name="pertanyaan2" value="Amsterdam">
+                                        <span>Amsterdam</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="listpertanyaan" id="pertanyaan3">
+                                <div class="d-flex flex-row align-items-center question-title">
+                                    <h5 class="mt-1 ml-2">3. Masa inkubasi COVID-19 selam?</h5>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q3-1" type="radio" name="pertanyaan3" value="7 hari">
+                                        <span>7 hari</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q3-2" type="radio" name="pertanyaan3" value="14 hari">
+                                        <span>14 hari</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q3-3" type="radio" name="pertanyaan3" value="2020">
+                                        <span>2020</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q3-4" type="radio" name="pertanyaan3" value="2021">
+                                        <span>2021</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="listpertanyaan" id="pertanyaan4">
+                                <div class="d-flex flex-row align-items-center question-title">
+                                    <h5 class="mt-1 ml-2">4. Dibawah ini adalah media penyebaran virus Corona, kecuali?
+                                    </h5>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q4-1" type="radio" name="pertanyaan4"
+                                            value="Bersalaman/Sentuhan tangan">
+                                        <span>Bersalaman/Sentuhan tangan</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q4-2" type="radio" name="pertanyaan4" value="Udara">
+                                        <span>Udara</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q4-3" type="radio" name="pertanyaan4"
+                                            value="Percikan batuk dan bersin">
+                                        <span>Percikan batuk dan bersin</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q4-4" type="radio" name="pertanyaan4" value="Benda-benda Padat">
+                                        <span>Benda-benda Padat</span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="listpertanyaan" id="pertanyaan5">
+                                <div class="d-flex flex-row align-items-center question-title">
+                                    <h5 class="mt-1 ml-2">5. COVID-19 bisa masuk melalui anggota-anggota tubuh di bawah
+                                        ini, kecuali...?</h5>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q5-1" type="radio" name="pertanyaan5" value="Mata">
+                                        <span>Mata</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q5-2" type="radio" name="pertanyaan5" value="Hidung">
+                                        <span>Hidung</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q5-3" type="radio" name="pertanyaan5" value="Mulut">
+                                        <span>Mulut</span>
+                                    </label>
+                                </div>
+                                <div class="ans ml-2">
+                                    <label class="radio">
+                                        <input id="q5-4" type="radio" name="pertanyaan5" value="Telinga">
+                                        <span>Telinga</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                            <button class="btn btn-primary border-success align-items-center btn-success" type="button"
+                                onclick="quiz()">Submit<i class="fa fa-angle-right ml-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </content>
+
+
+    <footer class="mt-auto">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">EDU-COVID</a>
+
+                <div class="navbar-nav m-auto">
+                    <a class="nav-link" aria-current="page" href="#">Github</a>
+                    <a class="nav-link" href="#">Heroku</a>
+                </div>
+
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" aria-current="page" href="#">Copyright Aldin / 1402019011</a>
+                </div>
+            </div>
+        </nav>
+    </footer>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="js/script1.js"></script>
+
+</body>
+
+</html>
