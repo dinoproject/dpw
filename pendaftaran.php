@@ -5,7 +5,7 @@ require 'config.php';
 			echo "
 			<script>
 				alert('Data Berhasil di Tambahkan!');
-					document.location.href = 'pasien.php';
+					document.location.href = 'login.php';
 					</script>
 			";
 		}else {
@@ -151,7 +151,7 @@ require 'config.php';
 					<div class="form-row">
 						<input type="text" name="alamat" class="alamat" id="alamat" placeholder="Alamat" required autocomplete="off">
 					</div>
-					<div class="form-row" method="post">
+					<div class="form-row">
 						<?php 
 							$provinsi = mysqli_query($con,"SELECT * FROM provinces");
 
