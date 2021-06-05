@@ -49,13 +49,18 @@ function insert_data($data) {
 	$kecamatan = $result2["name"];
 	$kelurahan = $result3["name"];
 
+	$akun = mysqli_query($con, "SELECT * FROM covid_ranger order by id DESC LIMIT 1");
+	$row_akun = mysqli_fetch_array($akun);
+
+	$id_ranger_akun = $row_akun['id'] +1;
+
 	$query1 = "INSERT INTO akun values ('', '$username', '$password', '$email
-	', 'user', '0')";
+	', 'user', '$id_ranger_akun')";
 	mysqli_query($con,$query1);
 
 
 	$query = "INSERT INTO covid_ranger values
-	('', '$nama_ranger','$jenis_kelamin','$email', '$no_hp', '$alamat', '$provinsi','$kota','$kecamatan','$kelurahan','$no_nik','$usia', '$tempat_lahir','$tanggal_lahir')";
+	('', '$nama_ranger','$jenis_kelamin','$email', '$no_hp', '$alamat', '$provinsi','$kota','$kecamatan','$kelurahan','$no_nik','$usia', '$tempat_lahir','$tanggal_lahir',0,'$username')";
 
 	mysqli_query($con,$query);
 	return mysqli_affected_rows($con);
@@ -94,7 +99,48 @@ function input_data($data) {
 	return mysqli_affected_rows($con);
 }
 
+function change_password($data) {
+	global $con;
+
+	$username = 'admin';
+	$password_old = $data['old_password'];
+	$password_new = $data['new_password'];
+
+	$query = "UPDATE akun set password = '$password_new' where username = '$username'";
+	mysqli_query($con, $query);
+	return mysqli_affected_rows($con);
+}
 
 
+function update_data($data) {
+	global $con;
+
+	$id = $data['id'];
+	$query = "UPDATE data_covid set status = 'Sudah Proses' where id = $id";
+    mysqli_query($con, $query);
+    return mysqli_affected_rows($con);
+}
+
+function update_nilai_kuis($id, $nilai) {
+	global $con;
+
+	$query = mysqli_query($con, "SELECT * FROM covid_ranger where id = $id");
+	$row = mysqli_fetch_array($query);
+
+	if($nilai > $row['kuis']) {
+		$queryy = "UPDATE covid_ranger set kuis = $nilai where id = $id";
+    	mysqli_query($con, $queryy);
+	}
+}
+
+
+function delete_data($data) {
+	global $con;
+
+	$id = $data['id'];
+	$query = "DELETE FROM data_covid where id = $id";
+    mysqli_query($con, $query);
+    return mysqli_affected_rows($con);
+}
 
 ?>
