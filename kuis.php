@@ -6,7 +6,7 @@
     $result = mysqli_query($con, "SELECT * FROM akun where id_covid_ranger = '$id'");
     $row = mysqli_fetch_array($result);
 
-    $ranger = mysqli_query($con, "SELECT * FROM covid_ranger ORDER BY kuis DESC LIMIT 5");
+    $ranger = mysqli_query($con, "SELECT * FROM covid_ranger ORDER BY kuis DESC LIMIT 10");
 
     if( !isset($_SESSION['Login_user']) ) {
         header("Location: login.php");
@@ -300,7 +300,7 @@
 
                 <!-- kedua -->
                 <div class="col-md-4 col-lg-4">
-                    <h5  class="text-center">Berikut ini adalah 5 username nilai tertinggi</h5>
+                    <h5  class="text-center">Berikut ini adalah 10 username nilai tertinggi</h5>
                     <table class="table table-striped">
                       <thead>
                         <tr>
