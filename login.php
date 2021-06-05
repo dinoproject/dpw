@@ -120,10 +120,16 @@
                         </button>
                     </div>
                 <div class="text-center p-t-20">
-						<a class="txt2" href="pendaftaran.php">
-							Create your Account
+						<a class="txt2" href="pendaftaran.php" style="font-size: 15px;">
+							Create your Account |  
 							<!-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> -->
 						</a>
+                        <a href=""> </a>
+
+                        <a class="txt2" href="guest_index.php" style="font-size: 15px;">
+                            Login as a guest
+                            <!-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> -->
+                        </a>
 					</div>
                 </form>
             </div>
@@ -150,6 +156,6 @@
     </script>
 <!--===============================================================================================-->
     <script src="js/main.js"></script>
-	
+
 </body>
 </html>
