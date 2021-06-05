@@ -102,7 +102,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Pencegahan</h5>
                     <p class="card-text">Beberapa Informasi untuk pencegahan penyebaran covid-19.</p>
-                    <a href="pencegahan.html" class="btn btn-primary">Learn More</a>
+                    <a href="pencegahan.php" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
@@ -110,7 +110,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Statistik</h5>
                     <p class="card-text">Data-Data tentang covid-19 dan statistiknya untuk tanggal 25 Maret 2021.</p>
-                    <a href="statistik.html" class="btn btn-primary">Learn More</a>
+                    <a href="statistik.php" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
@@ -118,7 +118,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Kuis</h5>
                     <p class="card-text">Kuis untuk mencoba seberapa kenal kamu dengan covid-19 ini.</p>
-                    <a href="kuis.html" class="btn btn-primary">Learn More</a>
+                    <a href="kuis.php" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
@@ -126,7 +126,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Contact</h5>
                     <p class="card-text">Jika ada pertanyaan yang ingin diajukan, Anda bisa bertanya kepada kami.</p>
-                    <a href="kontak.html" class="btn btn-primary">Learn More</a>
+                    <a href="kontak.php" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" aria-current="page" href="#">Copyright Aldin / 1402019011</a>
+                    <a class="nav-link" aria-current="page" href="#">Copyright FIRAL TEAM</a>
                 </div>
             </div>
         </nav>
@@ -159,4 +159,5 @@
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>
