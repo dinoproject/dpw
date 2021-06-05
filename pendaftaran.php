@@ -1,6 +1,48 @@
 <?php 
 require 'config.php';
 	if(isset($_POST["register"])) {
+		if($_POST['gender'] == "") {
+			echo "
+			<script>
+				alert('Mohon pilih gender anda!');
+					document.location.href = 'pendaftaran.php';
+					</script>
+			";
+		}
+		if($_POST['provinsi'] == "") {
+			echo "
+			<script>
+				alert('Mohon pilih provinsi anda terlebih dahulu');
+					document.location.href = 'pendaftaran.php';
+					</script>
+			";
+		}
+		if($_POST['kota'] == "") {
+			echo "
+			<script>
+				alert('Mohon pilih kota anda terlebih dahulu');
+					document.location.href = 'pendaftaran.php';
+					</script>
+			";
+		}
+		if($_POST['kelurahan'] == "") {
+			echo "
+			<script>
+				alert('Mohon pilih kelurahan anda terlebih dahulu');
+					document.location.href = 'pendaftaran.php';
+					</script>
+			";
+		}
+		if($_POST['kecamatan'] == "") {
+			echo "
+			<script>
+				alert('Mohon pilih kecamatan anda terlebih dahulu');
+					document.location.href = 'pendaftaran.php';
+					</script>
+			";
+		}
+
+
 		if(insert_data($_POST) > 0) {
 			echo "
 			<script>
@@ -66,7 +108,7 @@ require 'config.php';
 					</div>
 					<div class="form-row">
 						<select name="gender">
-						    <option class="option" value="Jenis Kelamin">Jenis Kelamin</option>
+						    <option value="">Jenis Kelamin</option>
 						    <option class="option" value="Pria">Pria</option>
 						    <option class="option" value="Wanita">Wanita</option>
 						</select>
@@ -87,61 +129,7 @@ require 'config.php';
 						</div>
 					</div>
 
-					<!-- <div class="form-row">
-						<select name="agama">
-						    <option class="option" value="Agama">Agama</option>
-						    <option class="option" value="Islam">Islam</option>
-						    <option class="option" value="Kristen">Kristen</option>
-						    <option class="option" value="Katolik">Katolik</option>
-						    <option class="option" value="Hindu">Hindu</option>
-						    <option class="option" value="Buddha">Buddha</option>
-						    <option class="option" value="Konghucu">Konghucu</option>
-						</select>
-						<span class="select-btn">
-						  	<i class="zmdi zmdi-chevron-down"></i>
-						</span>
-					</div> -->
-					<!-- <div class="form-row">
-						<select name="status">
-						    <option class="option" value="Status Pernikahan">Status Pernikahan</option>
-						    <option class="option" value="Menikah">Menikah</option>
-						    <option class="option" value="Belum Menikah">Belum Menikah</option>
-						    <option class="option" value="Janda">Janda</option>
-						    <option class="option" value="Duda">Duda</option>
-						</select>
-						<span class="select-btn">
-						  	<i class="zmdi zmdi-chevron-down"></i>
-						</span>
-					</div> -->
-					<!-- <div class="form-row">
-						<select name="pendidikan">
-						    <option class="option" value="Pendidikan">Pendidikan</option>
-						    <option class="option" value="SD">SD</option>
-						    <option class="option" value="SMP">SMP</option>
-						    <option class="option" value="SMA">SMA/SMK</option>
-						    <option class="option" value="Diploma 3">Diploma 3</option>
-						    <option class="option" value="Diploma 4">Diploma 4</option>
-						    <option class="option" value="Strata 1">Strata 1</option>
-						    <option class="option" value="Strata 2">Strata 2</option>
-						    <option class="option" value="Strata 3">Strata 3</option>
-						</select>
-						<span class="select-btn">
-						  	<i class="zmdi zmdi-chevron-down"></i>
-						</span>
-					</div> -->
-					<!-- <div class="form-row">
-						<select name="pembayaran">
-						    <option class="option" value="Cara Pembayaran">Cara Pembayaran</option>
-						    <option class="option" value="BPJS">BPJS</option>
-						    <option class="option" value="Mandiri">Umum/Mandiri</option>
-						</select>
-						<span class="select-btn">
-						  	<i class="zmdi zmdi-chevron-down"></i>
-						</span>
-					</div> -->
-					<!-- <div class="form-row">
-						<input type="text" name="pekerjaan" id="pekerjaan" class="input-text" placeholder="Pekerjaan" required autocomplete="off">
-					</div> -->
+
 				</div>
 				<div class="form-right">
 					<h2>Contact Details</h2>
