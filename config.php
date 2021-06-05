@@ -52,17 +52,17 @@ function insert_data($data) {
 	$akun = mysqli_query($con, "SELECT * FROM covid_ranger order by id DESC LIMIT 1");
 	$row_akun = mysqli_fetch_array($akun);
 
-	$id_ranger_akun = $row_akun['id'] +1;
-
-	$query1 = "INSERT INTO akun values ('', '$username', '$password', '$email
-	', 'user', '$id_ranger_akun')";
-	mysqli_query($con,$query1);
 
 
 	$query = "INSERT INTO covid_ranger values
 	('', '$nama_ranger','$jenis_kelamin','$email', '$no_hp', '$alamat', '$provinsi','$kota','$kecamatan','$kelurahan','$no_nik','$usia', '$tempat_lahir','$tanggal_lahir',0,'$username')";
 
 	mysqli_query($con,$query);
+
+	$id_ranger_akun = $row_akun['id'] +1;
+	$query1 = "INSERT INTO akun values ('', '$username', '$password', '$email
+	', 'user', '$id_ranger_akun')";
+	mysqli_query($con,$query1);
 	return mysqli_affected_rows($con);
 }
 
