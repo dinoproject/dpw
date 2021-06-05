@@ -6,10 +6,43 @@
     $result = mysqli_query($con, "SELECT * FROM akun where id_covid_ranger = '$id'");
     $row = mysqli_fetch_array($result);
 
+    $ranger = mysqli_query($con, "SELECT * FROM covid_ranger ORDER BY kuis DESC LIMIT 5");
+
     if( !isset($_SESSION['Login_user']) ) {
         header("Location: login.php");
         exit;
     }
+
+    $nilai = 0;
+    if( isset($_POST['quiz'])) {
+        $p1 = "";
+        $p2 = "";
+        $p3 = "";
+        $p4 = "";
+        $p5 = "";
+        if(isset($_POST['pertanyaan1'])) {
+            $p1 = $_POST['pertanyaan1'];
+            if($p1 === "2019") $nilai++;
+        }
+        if(isset($_POST['pertanyaan2'])) {
+            $p2 = $_POST['pertanyaan2'];
+            if($p2 === "Wuhan") $nilai++;
+        }
+        if(isset($_POST['pertanyaan3'])) {
+            $p3 = $_POST['pertanyaan3'];
+            if($p3 === "14 hari") $nilai++;
+        }
+        if(isset($_POST['pertanyaan4'])) {
+            $p4 = $_POST['pertanyaan4'];
+            if($p4 === "Udara") $nilai++;
+        }
+        if(isset($_POST['pertanyaan5'])) {
+            $p5 = $_POST['pertanyaan5'];
+            if($p5 === "Telinga") $nilai++;
+        }
+    }
+        $nilai*=20;
+        update_nilai_kuis($id, $nilai);
 
  ?>
 <!doctype html>
@@ -74,21 +107,26 @@
         <div class="header-parent">
             <div class="header-child">
                 <h1>Quiz Covid-19</h1>
-                <p>Pertanyaan-pertanyaan menarik untuk menambah pemahaman tentang covid-19.</p>
+                <p style="font-size: 19px;">Pertanyaan-pertanyaan menarik untuk menambah pemahaman tentang covid-19.</p>
             </div>
             <div class="header-child">
                 <img src="img/header.jpg" alt="">
             </div>
         </div>
 
+        <!-- <div class="d-flex justify-content-center row"> -->
+                <!-- <div class="col-md-10 col-lg-10"> -->
+
         <div class="container mt-5">
-            <div class="d-flex justify-content-center row">
-                <div class="col-md-10 col-lg-10">
+            <div class="d-flex row">
+                <div class="col-md-8 col-lg-8">
                     <div class="border">
+                        <form method="post">
                         <div class="question bg-white p-3 border-bottom">
                             <div class="d-flex flex-row justify-content-between align-items-center mcq">
                                 <h4>Covid Quiz</h4>
-                                <h4 id="shownilai">Nilai anda: <span id="nilainya"></span></h4>
+                                <h4>Nilai anda : <?= $nilai;  ?></h4>
+                                <h4 id="shownilai">Nilai anda: <span id="nilainya" name="nilai"></span></h4>
                             </div>
                         </div>
                         <div class="question bg-white p-3 border-bottom">
@@ -172,14 +210,14 @@
                                 </div>
                                 <div class="ans ml-2">
                                     <label class="radio">
-                                        <input id="q3-3" type="radio" name="pertanyaan3" value="2020">
-                                        <span>2020</span>
+                                        <input id="q3-3" type="radio" name="pertanyaan3" value="10 hari">
+                                        <span>10 hari</span>
                                     </label>
                                 </div>
                                 <div class="ans ml-2">
                                     <label class="radio">
-                                        <input id="q3-4" type="radio" name="pertanyaan3" value="2021">
-                                        <span>2021</span>
+                                        <input id="q3-4" type="radio" name="pertanyaan3" value="12 hari">
+                                        <span>12 hari</span>
                                     </label>
                                 </div>
 
@@ -252,10 +290,40 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
-                            <button class="btn btn-primary border-success align-items-center btn-success" type="button" onclick="quiz()">Submit<i class="fa fa-angle-right ml-2"></i></button>
+                            <button class="btn btn-primary border-success align-items-center btn-success" type="submit" name="quiz" >Submit<i class="fa fa-angle-right ml-2"></i></button>
                         </div>
+                    </form>
                     </div>
                 </div>
+                <!-- kesatu  -->
+
+
+                <!-- kedua -->
+                <div class="col-md-4 col-lg-4">
+                    <h5  class="text-center">Berikut ini adalah 5 username nilai tertinggi</h5>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">Username</th>
+                          <th scope="col">Nilai</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <?php $no = 1; ?>
+                    <?php foreach($ranger as $row) : ?>
+                                            <tr>
+                                                <td><?= $no;$no++; ?></td>
+                                                <td><?= $row["id"] ?></td>
+                                                <td><?= $row["username"] ?></td>
+                                                <td><?= $row["kuis"] ?></td>
+                    </tr>
+                    <?php endforeach; ?> 
+                  </tbody>
+          </table>
+      </div>
+                <!-- kedua akhir -->
             </div>
         </div>
 
@@ -273,7 +341,7 @@
                 </div>
 
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" aria-current="page" href="#">Copyright Aldin / 1402019011</a>
+                    <a class="nav-link" aria-current="page" href="#">Copyright FIRAL TEAM</a>
                 </div>
             </div>
         </nav>
@@ -285,8 +353,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-    <script src="js/script1.js"></script>
-
+    <!-- <script src="js/script1.js"></script> -->
+    <!-- <script>
+        function quiz1() {
+    var nilai = 0;
+    if (document.getElementById('q1-2').checked === true) nilai++;
+    if (document.getElementById('q2-1').checked === true) nilai++;
+    if (document.getElementById('q3-2').checked === true) nilai++;
+    if (document.getElementById('q4-2').checked === true) nilai++;
+    if (document.getElementById('q5-4').checked === true) nilai++;
+    document.getElementById('shownilai').style.display = 'inline';
+    document.getElementById('nilainya').innerHTML = nilai * 20;
+    var radio1 = document.querySelector('input[type=radio][name=pertanyaan1]:checked');
+    var radio2 = document.querySelector('input[type=radio][name=pertanyaan2]:checked');
+    var radio3 = document.querySelector('input[type=radio][name=pertanyaan3]:checked');
+    var radio4 = document.querySelector('input[type=radio][name=pertanyaan4]:checked');
+    var radio5 = document.querySelector('input[type=radio][name=pertanyaan5]:checked');
+    radio1.checked = false;
+    radio2.checked = false;
+    radio3.checked = false;
+    radio4.checked = false;
+    radio5.checked = false;
+}
+    </script> -->
 </body>
 
 </html>
