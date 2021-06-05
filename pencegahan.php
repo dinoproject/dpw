@@ -41,6 +41,9 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="input_covid.php">Input Data</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="pencegahan.php">Pencegahan</a>
                     </li>
                     <li class="nav-item">
@@ -147,7 +150,7 @@
                 </div>
 
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" aria-current="page" href="#">Copyright Aldin / 1402019011</a>
+                    <a class="nav-link" aria-current="page" href="#">Copyright FIRAL TEAM</a>
                 </div>
             </div>
         </nav>
