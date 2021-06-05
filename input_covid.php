@@ -17,16 +17,55 @@
 
 
     if( isset($_POST['input'])) {
-    	// echo $_POST['nama_lengkap'];
-    	// echo $_POST['kasus'];
-    	// echo $_POST['provinsi'];
-    	if(input_data($_POST) > 0) {
-			echo "
-			<script>
-				alert('Data Berhasil di Tambahkan!');
-					document.location.href = 'input_covid.php';
-					</script>
-			";
+
+      if($_POST['kasus'] == "") {
+        echo "
+        <script>
+        alert('Mohon pilih kasus anda terlebih dahulu');
+        document.location.href = 'input_covid.php';
+        </script>
+        ";
+      }
+
+      if($_POST['provinsi'] == "") {
+        echo "
+        <script>
+        alert('Mohon pilih provinsi anda terlebih dahulu');
+        document.location.href = 'input_covid.php';
+        </script>
+        ";
+      }
+      if($_POST['kota'] == "") {
+        echo "
+        <script>
+        alert('Mohon pilih kota anda terlebih dahulu');
+        document.location.href = 'input_covid.php';
+        </script>
+        ";
+      }
+      if($_POST['kelurahan'] == "") {
+        echo "
+        <script>
+        alert('Mohon pilih kelurahan anda terlebih dahulu');
+        document.location.href = 'input_covid.php';
+        </script>
+        ";
+      }
+      if($_POST['kecamatan'] == "") {
+        echo "
+        <script>
+        alert('Mohon pilih kecamatan anda terlebih dahulu');
+        document.location.href = 'input_covid.php';
+        </script>
+        ";
+      }
+      if(input_data($_POST) > 0) {
+       echo "
+       <script>
+       alert('Data Berhasil di Tambahkan!');
+       document.location.href = 'input_covid.php';
+       </script>
+       ";
 		}else {
 			echo "
 			<script>
@@ -109,7 +148,7 @@
   <div class="col-md-6">
     <label for="inputState" class="form-label">Kasus</label>
     <select id="inputState" class="form-select" name="kasus">
-      <option selected>-- Pilih --</option>
+      <option value="">-- Pilih --</option>
       <option value="Positif">Positif</option>
       <option value="Sembuh">Sembuh</option>
       <option value="Meninggal Dunia">Meninggal Dunia</option>
@@ -117,7 +156,7 @@
   </div>
   <div class="col-md-6">
     <label for="inputAddress" class="form-label">Jumlah</label>
-    <input type="number" class="form-control" id="inputAddress" name="jumlah">
+    <input type="number" class="form-control" id="inputAddress" name="jumlah" required>
   </div>
 
   <div class="col-md-6">
