@@ -1,7 +1,7 @@
 <?php 
     session_start();
     require_once 'config.php';
-     $result = mysqli_query($con, "SELECT * FROM data_covid ORDER BY id DESC");
+     $result = mysqli_query($con, "SELECT * FROM data_covid where status = 'Sudah Proses' ORDER BY id DESC");
     // $ = mysqli_query($con, "SELECT * FROM ")
 
     if( !isset($_SESSION['Login_admin']) ) {
@@ -37,14 +37,14 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
+                    <!-- <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
                 </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i>admin</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -58,64 +58,16 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class="nav-link" href="admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-                            <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layout
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div>
- -->                            <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a> -->
-                            <!-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div> -->
-                            <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
-                           <!--  <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a> -->
                             <a class="nav-link" href="tables.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables Covid Ranger
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="password_admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
                                 Change Password
                             </a>
@@ -137,72 +89,118 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Sembuh Hari ini</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="card-body">Total Sembuh Saat ini</div>
+                                    
+                                    <?php 
+                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Sembuh'");
+                                        $total = 0;
+                                    ?>
+                                    <?php foreach($result1 as $row) : ?>
+                                        <?php 
+                                            $total += $row['jumlah_kasus'];
+                                         ?>
+                                     <?php endforeach; ?>
+                                     <div class="card-body"><?= $total; ?> orang</div>
+                                    <!-- <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">Total Sembuh Saat ini</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Meninggal Hari ini</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="card-body">Meninggal Saat ini</div>
+                                    <?php 
+                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Meninggal Dunia'");
+                                        $total = 0;
+                                    ?>
+                                    <?php foreach($result1 as $row) : ?>
+                                        <?php 
+                                            $total += $row['jumlah_kasus'];
+                                         ?>
+                                     <?php endforeach; ?>
+                                     <div class="card-body"><?= $total; ?> orang</div>
+                                    <!-- <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">Total Meninggal</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
-                            <!-- <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Meninggal Hari ini</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Positif Hari ini</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="card-body">Positif Saat ini</div>
+                                    <?php 
+                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Positif' and status = 'Sudah Proses'");
+                                        $total = 0;
+                                    ?>
+                                    <?php foreach($result1 as $row) : ?>
+                                        <?php 
+                                            $total += $row['jumlah_kasus'];
+                                         ?>
+                                     <?php endforeach; ?>
+                                     <div class="card-body"><?= $total; ?> orang</div>
+                                    <!-- <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">Total Positif sa</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="card mb-4">
+
+                        <div class="container-fluid px-4">
+                        <h1 class="mt-4">Tables</h1>
+                        <ol class="breadcrumb mb-4">
+                            <!-- <li class="breadcrumb-item"><a href="admin.html">Dashboard</a></li> -->
+                            <li class="breadcrumb-item active">Tables</li>
+                        </ol>
+                        
+                        <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Table Example
+                                Data Table Terkonfirmasi
                             </div>
-                    </div> -->
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Kasus</th>
+                                            <th>Jumlah</th>
+                                            <th>Provinsi</th>
+                                            <th>Kota</th>
+                                            <th>Kelurahan</th>
+                                            <th>Kecamatan</th>
+                                            <th>Tanggal input</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($result as $row) : ?>
+                                            <tr>
+                                                <td><?= $row["id_covid_ranger"] ?></td>
+                                                <td><?= $row["nama"] ?></td>
+                                                <td><?= $row["kasus"] ?></td>
+                                                <td><?= $row["jumlah_kasus"] ?></td>
+                                                <td><?= $row["provinsi"] ?></td>
+                                                <td><?= $row["kota"] ?></td>
+                                                <td><?= $row["kelurahan"] ?></td>
+                                                <td><?= $row["kecamatan"] ?></td>
+                                                <td><?= $row["tanggal_masuk"] ?></td>
+                                                <td><?= $row["status"] ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Copyright &copy; FIRAL TEAM 2021</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
