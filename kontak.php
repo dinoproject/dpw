@@ -42,6 +42,9 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="input_covid.php">Input Data</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="pencegahan.php">Pencegahan</a>
                     </li>
                     <li class="nav-item">
