@@ -94,6 +94,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables Covid Ranger
                             </a>
+                            <a class="nav-link" href="table_ranger.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
+                                Tables User
+                            </a>
                             <a class="nav-link" href="password_admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
                                 Change Password
