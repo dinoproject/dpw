@@ -92,7 +92,7 @@
                                     <div class="card-body">Total Sembuh Saat ini</div>
                                     
                                     <?php 
-                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Sembuh'");
+                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Sembuh' and status = 'Sudah Proses'");
                                         $total = 0;
                                     ?>
                                     <?php foreach($result1 as $row) : ?>
@@ -111,7 +111,7 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">Meninggal Saat ini</div>
                                     <?php 
-                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Meninggal Dunia'");
+                                        $result1 = mysqli_query($con, "SELECT * FROM data_covid where kasus = 'Meninggal Dunia' and status = 'Sudah Proses'");
                                         $total = 0;
                                     ?>
                                     <?php foreach($result1 as $row) : ?>
