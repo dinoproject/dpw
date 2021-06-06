@@ -168,40 +168,34 @@
 
                 </main>
                 </div>
-    <!-- <content class="mt-auto">
-        <div class="header-parent">
-            <div class="header-child">
-                <h1>Statistik Covid-19</h1>
-                <p>Data dan statistik covid-19 pada tanggal 25 Maret 2021.</p>
-            </div>
-            <div class="header-child">
-                <img src="img/stats.jpg" alt="">
-            </div>
-        </div>
-
-        <div class="header-parent">
-            <div class="header-child">
-                <img src="img/datacovid.png" alt="">
-            </div>
-            <div class="header-child">
-                <h1>Data Covid-19</h1>
-            </div>
-
-        </div>
 
 
-        <div class="header-parent">
-            <div class="header-child">
-                <h1>Grafik Covid-19</h1>
-            </div>
-            <div class="header-child">
-                <img src="img/grafikcovid.png" alt="">
-            </div>
-        </div>
-
-
-    </content> -->
-
+                <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Statistik Positif Covid</h2>
+                                <div style="width: 800px;margin: 0px auto;">
+                                    <canvas id="myChart"></canvas>
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Statistik Sembuh Covid</h2>
+                                <div style="width: 800px;margin: 0px auto;">
+                                    <canvas id="myChart2"></canvas>
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center">Statistik Meninggal Covid</h2>
+                                <div style="width: 800px;margin: 0px auto;">
+                                    <canvas id="myChart3"></canvas>
+                                </div>            
+                            </div>
+                        </div>
+                    </div>
 
     <footer>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -230,6 +224,226 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+        <script src="js/Chart.js"></script>
+
+        <script>
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Juni 2021", "Juli 2021", "Agustus 2021", "September 2021"],
+                    datasets: [{
+                        label: '',
+                        data: [
+                        <?php 
+                        $juni = mysqli_query($con,"select * from data_covid where kasus='Positif' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-06%'");
+                    // $row = mysqli_fetch_array($juni);
+                        $positif = 0;
+                        foreach($juni as $row){
+                            $positif += $row['jumlah_kasus'];
+                        }
+                        echo $positif;
+                        ?>, 
+                        <?php 
+                        $juli = mysqli_query($con,"select * from data_covid where kasus='Positif' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-07%'");
+                        // echo mysqli_num_rows($juli);
+                        $positif = 0;
+                        foreach($juli as $row){
+                            $positif += $row['jumlah_kasus'];
+                        }
+                        echo $positif;
+                        ?>, 
+                        <?php 
+                        $agustus = mysqli_query($con,"select * from data_covid where kasus='Positif' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-08%'");
+                        // echo mysqli_num_rows($jumlah_fisip);
+                        $positif = 0;
+                        foreach($agustus as $row){
+                            $positif += $row['jumlah_kasus'];
+                        }
+                        echo $positif;
+                        ?>, 
+                        <?php 
+                        $september = mysqli_query($con,"select * from data_covid where kasus='Positif' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-09%'");
+                        // echo mysqli_num_rows($jumlah_pertanian);
+                        $positif = 0;
+                        foreach($september as $row){
+                            $positif += $row['jumlah_kasus'];
+                        }
+                        echo $positif;
+                        ?>
+                        ],
+                        backgroundColor: [
+                        'rgba(255, 162, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                        ],
+                        borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            var ctx = document.getElementById("myChart2").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Juni 2021", "Juli 2021", "Agustus 2021", "September 2021"],
+                    datasets: [{
+                        label: '',
+                        data: [
+                        <?php 
+                        $juni = mysqli_query($con,"select * from data_covid where kasus='Sembuh' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-06%'");
+                    // $row = mysqli_fetch_array($juni);
+                        $sembuh = 0;
+                        foreach($juni as $row){
+                            $sembuh += $row['jumlah_kasus'];
+                        }
+                        echo $sembuh;
+                        ?>, 
+                        <?php 
+                        $juli = mysqli_query($con,"select * from data_covid where kasus='Sembuh' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-07%'");
+                        // echo mysqli_num_rows($juli);
+                        $sembuh = 0;
+                        foreach($juli as $row){
+                            $sembuh += $row['jumlah_kasus'];
+                        }
+                        echo $sembuh;
+                        ?>, 
+                        <?php 
+                        $agustus = mysqli_query($con,"select * from data_covid where kasus='Sembuh' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-08%'");
+                        // echo mysqli_num_rows($jumlah_fisip);
+                        $sembuh = 0;
+                        foreach($agustus as $row){
+                            $sembuh += $row['jumlah_kasus'];
+                        }
+                        echo $sembuh;
+                        ?>, 
+                        <?php 
+                        $september = mysqli_query($con,"select * from data_covid where kasus='Sembuh' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-09%'");
+                        // echo mysqli_num_rows($jumlah_pertanian);
+                        $sembuh = 0;
+                        foreach($september as $row){
+                            $sembuh += $row['jumlah_kasus'];
+                        }
+                        echo $sembuh;
+                        ?>
+                        ],
+                        backgroundColor: [
+                        'rgba(100, 162, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(100, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                        ],
+                        borderColor: [
+                        'rgba(100,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(100, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            var ctx = document.getElementById("myChart3").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Juni 2021", "Juli 2021", "Agustus 2021", "September 2021"],
+                    datasets: [{
+                        label: '',
+                        data: [
+                        <?php 
+                        $juni = mysqli_query($con,"select * from data_covid where kasus='Meninggal Dunia' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-06%'");
+                    // $row = mysqli_fetch_array($juni);
+                        $meninggal = 0;
+                        foreach($juni as $row){
+                            $meninggal += $row['jumlah_kasus'];
+                        }
+                        echo $meninggal;
+                        ?>, 
+                        <?php 
+                        $juli = mysqli_query($con,"select * from data_covid where kasus='Meninggal Dunia' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-07%'");
+                        // echo mysqli_num_rows($juli);
+                        $meninggal = 0;
+                        foreach($juli as $row){
+                            $meninggal += $row['jumlah_kasus'];
+                        }
+                        echo $meninggal;
+                        ?>, 
+                        <?php 
+                        $agustus = mysqli_query($con,"select * from data_covid where kasus='Meninggal Dunia' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-08%'");
+                        // echo mysqli_num_rows($jumlah_fisip);
+                        $meninggal = 0;
+                        foreach($agustus as $row){
+                            $meninggal += $row['jumlah_kasus'];
+                        }
+                        echo $meninggal;
+                        ?>, 
+                        <?php 
+                        $september = mysqli_query($con,"select * from data_covid where kasus='Meninggal Dunia' and status = 'Sudah Proses' and tanggal_masuk LIKE '2021-09%'");
+                        // echo mysqli_num_rows($jumlah_pertanian);
+                        $meninggal = 0;
+                        foreach($september as $row){
+                            $meninggal += $row['jumlah_kasus'];
+                        }
+                        echo $meninggal;
+                        ?>
+                        ],
+                        backgroundColor: [
+                        'rgba(10, 162, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(10, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                        ],
+                        borderColor: [
+                        'rgba(10,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(10, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
 </body>
 
 </html>
